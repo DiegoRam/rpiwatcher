@@ -5,8 +5,6 @@ block content
 			div.span6.offset3
 				div.hero-unit
 					ul
-						- listPic.forEach(function(pic){
-						li #{article.author}
-						- })
-
+						for pic in listPic
+							li #{pic}
 	

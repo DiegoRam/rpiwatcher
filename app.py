@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import os
+import glob
 import time
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -28,17 +28,18 @@ def home():
 	flash(GREEN)
 	return render_template('index.jade')	
 
-@app.route("/list", methods=['GET'])
+@app.route("/list/", methods=['GET'])
 def listPictures():
+	list = glob.glob("static/img/cam/*.jpg")
 	listPic = []
-	for filenames in os.walk('/static/img/cam'):
-		for filename in filenames:
-			listPic.append('<img src=/static/img/cam/' + filename)
-
+	for file in list:
+		listPic.append("<img src='/" + file + "'>")
+	flash(BLUE)
 	return render_template('listPictures.jade', listPic=listPic)
 
-@app.route("/current",methods=['GET'])
+@app.route("/current/",methods=['GET'])
 def current():
+	flash(RED)
 	return render_template('current.jade')
 
 
