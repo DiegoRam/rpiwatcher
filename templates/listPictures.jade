@@ -1,0 +1,12 @@
+extends layout
+block content
+	div.container-fluid
+		div.row-fluid
+			div.span6.offset3
+				div.hero-unit
+					ul
+						- listPic.forEach(function(pic){
+						li #{article.author}
+						- })
+
+	

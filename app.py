@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import os
 import time
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -26,6 +27,19 @@ def flash(colour):
 def home():
 	flash(GREEN)
 	return render_template('index.jade')	
+
+@app.route("/list", methods=['GET'])
+def listPictures():
+	listPic = []
+	for filenames in os.walk('/static/img/cam'):
+		for filename in filenames:
+			listPic.append('<img src=/static/img/cam/' + filename)
+
+	return render_template('listPictures.jade', listPic=listPic)
+
+@app.route("/current",methods=['GET'])
+def current():
+	return render_template('current.jade')
 
 
 if __name__ == "__main__":
