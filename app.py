@@ -12,7 +12,7 @@ BLUE  = "001"
 OFF = "000"
 
 def writeColour(colour):
-	led = ("/dev/ledborg","w")
+	led = open("/dev/ledborg","w")
 	led.write(colour)
 	led.close()
 
@@ -24,9 +24,9 @@ def flash(colour):
 
 @app.route("/", methods=['GET'])
 def home():
-	writeColour(BLUE)
+	flash(BLUE)
 	return render_template('index.jade')	
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	app.run(debug=True,host="0.0.0.0")
