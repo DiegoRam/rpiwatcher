@@ -24,7 +24,7 @@ def flash(colour):
 
 @app.route("/", methods=['GET'])
 def home():
-	flash(BLUE)
+	flash(GREEN)
 	return render_template('index.jade')	
 
 
